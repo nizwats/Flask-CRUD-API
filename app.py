@@ -3,8 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 
 # App setup
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 db = SQLAlchemy(app)
+
 
 # Database model
 class User(db.Model):
@@ -15,40 +16,45 @@ class User(db.Model):
     def to_dict(self):
         return {"id": self.id, "name": self.name, "email": self.email}
 
+
 # Routes
-@app.route('/users', methods=['POST'])
+@app.route("/users", methods=["POST"])
 def create_user():
     data = request.get_json()
-    if not data.get('name') or not data.get('email'):
+    if not data.get("name") or not data.get("email"):
         return jsonify({"error": "Name and email required"}), 400
-    user = User(name=data['name'], email=data['email'])
+    user = User(name=data["name"], email=data["email"])
     db.session.add(user)
     db.session.commit()
     return jsonify(user.to_dict()), 201
 
-@app.route('/users', methods=['GET'])
+
+@app.route("/users", methods=["GET"])
 def get_users():
     users = User.query.all()
     return jsonify([user.to_dict() for user in users])
 
-@app.route('/users/<int:user_id>', methods=['GET'])
+
+@app.route("/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     user = User.query.get(user_id)
     return jsonify(user.to_dict()) if user else ({"error": "User not found"}, 404)
 
-@app.route('/users/<int:user_id>', methods=['PUT'])
+
+@app.route("/users/<int:user_id>", methods=["PUT"])
 def update_user(user_id):
     user = User.query.get(user_id)
     if not user:
         return jsonify({"error": "User not found"}), 404
     data = request.get_json()
-    user.name = data.get('name', user.name)
-    user.email = data.get('email', user.email)
+    user.name = data.get("name", user.name)
+    user.email = data.get("email", user.email)
     db.session.commit()
 
     return jsonify(user.to_dict())
 
-@app.route('/users/<int:user_id>', methods=['DELETE'])
+
+@app.route("/users/<int:user_id>", methods=["DELETE"])
 def delete_user(user_id):
     user = User.query.get(user_id)
     if not user:
@@ -57,10 +63,9 @@ def delete_user(user_id):
     db.session.commit()
     return jsonify({"message": "User deleted"})
 
+
 # Run app
-if __name__ == '__main__':
+if __name__ == "__main__":
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-
-
