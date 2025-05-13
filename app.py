@@ -1,3 +1,7 @@
+@app.route("/")
+def home():
+    return "Flask CRUD API is running!"
+
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
