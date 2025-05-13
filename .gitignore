@@ -16,5 +16,9 @@ venv/
 # Mac/Linux
 .DS_Store
 
+# Instance
+instance/
+
 # Other
 *.log
+
