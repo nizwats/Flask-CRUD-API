@@ -36,21 +36,24 @@ flask_crud_api/
 git clone https://github.com/nizwats/Flask-CRUD-API.git
 cd Flask-CRUD-API
 
-    Create and Activate a Virtual Environment
+
+2. Create and Activate a Virtual Environment
 
 python3 -m venv venv
 source venv/bin/activate
 
-    Install Dependencies
+
+3. Install Dependencies
 
 pip install -r requirements.txt
 
-    Run the Flask App Locally
+
+4. Run the Flask App Locally
 
 python app.py
 
-The application will run at:
-http://127.0.0.1:5000/
+5. The application will run at: http://127.0.0.1:5000/
+
 API Endpoints
 Method	Endpoint	Description
 POST	/users	Create a new user
@@ -59,31 +62,31 @@ PUT	/users/<id>	Update a user
 DELETE	/users/<id>	Delete a user
 Example Requests
 
-Use curl or Postman to interact with the API.
 
-Create a User (POST)
+6. Use curl or Postman to interact with the API.
 
+Create a User (POST):
 curl -X POST http://127.0.0.1:5000/users \
 -H "Content-Type: application/json" \
 -d '{"name": "John Doe", "email": "john@example.com"}'
 
-Get All Users (GET)
 
+Get All Users (GET):
 curl http://127.0.0.1:5000/users
 
-Update a User (PUT)
 
+Update a User (PUT):
 curl -X PUT http://127.0.0.1:5000/users/1 \
 -H "Content-Type: application/json" \
 -d '{"name": "Updated Name", "email": "updated@example.com"}'
 
-Delete a User (DELETE)
 
+Delete a User (DELETE):
 curl -X DELETE http://127.0.0.1:5000/users/1
 
-Deployment
 
+7. Deployment
 The app is deployed on Heroku and uses a Heroku Postgres add-on.
 
-Live API URL:
+8. Live API URL:
 https://nizwa-crud-api-05975b68cbc4.herokuapp.com/
